@@ -1,5 +1,88 @@
 # Changelog
 
+## \[2.2.0]
+
+- [`3a79266b`](https://github.com/tauri-apps/plugins-workspace/commit/3a79266b8cf96a55b1ae6339d725567d45a44b1d) ([#2173](https://github.com/tauri-apps/plugins-workspace/pull/2173) by [@FabianLars](https://github.com/tauri-apps/plugins-workspace/../../FabianLars)) Bumped all plugins to `v2.2.0`. From now, the versions for the Rust and JavaScript packages of each plugin will be in sync with each other.
+
+### Dependencies
+
+- Upgraded to `fs@2.2.0`
+
+## \[2.0.2]
+
+### Dependencies
+
+- Upgraded to `fs-js@2.0.4`
+
+## \[2.0.4]
+
+- [`a3b553dd`](https://github.com/tauri-apps/plugins-workspace/commit/a3b553ddb403771aa699362c4e69a064b7731da5) ([#2079](https://github.com/tauri-apps/plugins-workspace/pull/2079) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Add tracing logs for requestes and responses behind `tracing` feature flag.
+
+### Dependencies
+
+- Upgraded to `fs@2.1.0`
+
+## \[2.0.3]
+
+### Dependencies
+
+- Upgraded to `fs@2.0.3`
+
+## \[2.0.1]
+
+- [`cfd48b3b`](https://github.com/tauri-apps/plugins-workspace/commit/cfd48b3b2ec0fccfc162197518694ed59ceda22c) ([#1941](https://github.com/tauri-apps/plugins-workspace/pull/1941) by [@Nipsuli](https://github.com/tauri-apps/plugins-workspace/../../Nipsuli)) Allow skipping sending `Origin` header in HTTP requests by setting `Origin` header to an empty string when calling `fetch`.
+- [`9b2840db`](https://github.com/tauri-apps/plugins-workspace/commit/9b2840db9464cf08db75806270e4441f0af81e5d) ([#1884](https://github.com/tauri-apps/plugins-workspace/pull/1884) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Retain headers order.
+
+## \[2.0.1]
+
+- [`a1a82208`](https://github.com/tauri-apps/plugins-workspace/commit/a1a82208ed4ab87f83310be0dc95428aec9ab241) ([#1873](https://github.com/tauri-apps/plugins-workspace/pull/1873) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Downgrade MSRV to 1.77.2 to support Windows 7.
+
+### Dependencies
+
+- Upgraded to `fs@2.0.1`
+
+## \[2.0.0]
+
+- [`e2c4dfb6`](https://github.com/tauri-apps/plugins-workspace/commit/e2c4dfb6af43e5dd8d9ceba232c315f5febd55c1) Update to tauri v2 stable release.
+
+### Dependencies
+
+- Upgraded to `fs@2.0.0`
+
+## \[2.0.0-rc.6]
+
+### Dependencies
+
+- Upgraded to `fs@2.0.0-rc.6`
+
+## \[2.0.0-rc.5]
+
+### Dependencies
+
+- Upgraded to `fs@2.0.0-rc.5`
+
+## \[2.0.0-rc.4]
+
+### Dependencies
+
+- Upgraded to `fs@2.0.0-rc.4`
+
+## \[2.0.0-rc.3]
+
+### Dependencies
+
+- Upgraded to `fs@2.0.0-rc.3`
+
+## \[2.0.0-rc.2]
+
+### Dependencies
+
+- Upgraded to `fs@2.0.0-rc.2`
+
+## \[2.0.0-rc.2]
+
+- [`e2e97db5`](https://github.com/tauri-apps/plugins-workspace/commit/e2e97db51983267f5be84d4f6f0278d58834d1f5) ([#1701](https://github.com/tauri-apps/plugins-workspace/pull/1701) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Update to tauri 2.0.0-rc.8
+
 ## \[2.0.0-rc.1]
 
 - [`84f8bd5e`](https://github.com/tauri-apps/plugins-workspace/commit/84f8bd5e1ef22e664267380b5bbf756ebc5389c3) ([#1662](https://github.com/tauri-apps/plugins-workspace/pull/1662) by [@twlite](https://github.com/tauri-apps/plugins-workspace/../../twlite)) Fixed an issue with abort signal not aborting the fetch request.
@@ -139,97 +222,3 @@
 ## \[2.0.0-alpha.0]
 
 - [`717ae67`](https://github.com/tauri-apps/plugins-workspace/commit/717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  /717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  ace/pull/371)) First v2 alpha release!
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  /717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  ace/pull/371)) First v2 alpha release!
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  lpha release!
-  !
-  371\)) First v2 alpha release!
-  ub.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  ace/pull/371)) First v2 alpha release!
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  lpha release!
-  !
-  371\)) First v2 alpha release!
-  lpha release!
-  !
-  371\)) First v2 alpha release!
-  t v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  ace/pull/371)) First v2 alpha release!
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  !
-  371\)) First v2 alpha release!
-  lpha release!
-  !
-  371\)) First v2 alpha release!
-  lpha release!
-  !
-  371\)) First v2 alpha release!
-  lpha release!
-  !
-  371\)) First v2 alpha release!
-  lpha release!
-  lpha release!
-  !
-  371\)) First v2 alpha release!
-  lpha release!
-  !
-  371\)) First v2 alpha release!

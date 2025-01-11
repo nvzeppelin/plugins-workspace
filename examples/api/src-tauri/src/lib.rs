@@ -36,6 +36,7 @@ pub fn run() {
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_process::init())
+        .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_store::Builder::default().build())
         .setup(move |app| {
@@ -46,6 +47,8 @@ pub fn run() {
                 app.handle()
                     .plugin(tauri_plugin_global_shortcut::Builder::new().build())?;
                 app.handle()
+                    .plugin(tauri_plugin_window_state::Builder::new().build())?;
+                app.handle()
                     .plugin(tauri_plugin_updater::Builder::new().build())?;
             }
             #[cfg(mobile)]
@@ -53,6 +56,8 @@ pub fn run() {
                 app.handle().plugin(tauri_plugin_barcode_scanner::init())?;
                 app.handle().plugin(tauri_plugin_nfc::init())?;
                 app.handle().plugin(tauri_plugin_biometric::init())?;
+                app.handle().plugin(tauri_plugin_geolocation::init())?;
+                app.handle().plugin(tauri_plugin_haptics::init())?;
             }
 
             let mut webview_window_builder =
@@ -64,7 +69,7 @@ pub fn run() {
                     .title("Tauri API Validation")
                     .inner_size(1000., 800.)
                     .min_inner_size(600., 400.)
-                    .content_protected(true);
+                    .visible(false);
             }
 
             #[cfg(target_os = "windows")]

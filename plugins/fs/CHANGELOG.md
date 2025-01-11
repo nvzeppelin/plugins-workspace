@@ -1,5 +1,74 @@
 # Changelog
 
+## \[2.2.0]
+
+- [`3a79266b`](https://github.com/tauri-apps/plugins-workspace/commit/3a79266b8cf96a55b1ae6339d725567d45a44b1d) ([#2173](https://github.com/tauri-apps/plugins-workspace/pull/2173) by [@FabianLars](https://github.com/tauri-apps/plugins-workspace/../../FabianLars)) Bumped all plugins to `v2.2.0`. From now, the versions for the Rust and JavaScript packages of each plugin will be in sync with each other.
+
+## \[2.0.4]
+
+- [`77b85507`](https://github.com/tauri-apps/plugins-workspace/commit/77b855074aad612f2b28e6a3b5881fac767a05ae) ([#2171](https://github.com/tauri-apps/plugins-workspace/pull/2171) by [@FabianLars](https://github.com/tauri-apps/plugins-workspace/../../FabianLars)) Fixed docs.rs build.
+
+## \[2.0.3]
+
+- [`ed981027`](https://github.com/tauri-apps/plugins-workspace/commit/ed981027dd4fba7d0e2f836eb5db34d344388d73) ([#1962](https://github.com/tauri-apps/plugins-workspace/pull/1962) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Improve performance of `readTextFile` and `readTextFileLines` APIs
+- [`3e78173d`](https://github.com/tauri-apps/plugins-workspace/commit/3e78173df9ce90aa3b19e1f36d1f8712c5020fb6) ([#2018](https://github.com/tauri-apps/plugins-workspace/pull/2018) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Fix `readDir` function failing to read directories that contain broken symlinks.
+- [`5092ea5e`](https://github.com/tauri-apps/plugins-workspace/commit/5092ea5e89817c0550d09b0a4ad17bf1253b23df) ([#1964](https://github.com/tauri-apps/plugins-workspace/pull/1964) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Add support for using `ReadableStream<Unit8Array>` with `writeFile` API.
+
+## \[2.0.2]
+
+- [`77149dc4`](https://github.com/tauri-apps/plugins-workspace/commit/77149dc4320d26b413e4a6bbe82c654367c51b32) ([#1965](https://github.com/tauri-apps/plugins-workspace/pull/1965) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Fix `writeTextFile` converting UTF-8 characters (for example `äöü`) in the given path into replacement character (`�`)
+
+## \[2.0.3]
+
+- [`14cee64c`](https://github.com/tauri-apps/plugins-workspace/commit/14cee64c82a72655ae6a4ac0892736a2959dbda5) ([#1958](https://github.com/tauri-apps/plugins-workspace/pull/1958) by [@bWanShiTong](https://github.com/tauri-apps/plugins-workspace/../../bWanShiTong)) Fix compilation on targets with pointer width of `16` or `32`
+
+## \[2.0.1]
+
+- [`ae802456`](https://github.com/tauri-apps/plugins-workspace/commit/ae8024565f074f313084777c8b10d1b5e3bbe220) ([#1950](https://github.com/tauri-apps/plugins-workspace/pull/1950) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Improve performance of the `FileHandle.read` and `writeTextFile` APIs.
+
+## \[2.0.1]
+
+- [`a1a82208`](https://github.com/tauri-apps/plugins-workspace/commit/a1a82208ed4ab87f83310be0dc95428aec9ab241) ([#1873](https://github.com/tauri-apps/plugins-workspace/pull/1873) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Downgrade MSRV to 1.77.2 to support Windows 7.
+
+## \[2.0.0]
+
+- [`e2c4dfb6`](https://github.com/tauri-apps/plugins-workspace/commit/e2c4dfb6af43e5dd8d9ceba232c315f5febd55c1) Update to tauri v2 stable release.
+
+## \[2.0.0-rc.6]
+
+- [`fc9b189e`](https://github.com/tauri-apps/plugins-workspace/commit/fc9b189e83a29bd750714ec6336133c6eabdfa20) ([#1837](https://github.com/tauri-apps/plugins-workspace/pull/1837) by [@FabianLars](https://github.com/tauri-apps/plugins-workspace/../../FabianLars)) Fix failing to deserialize capability file when using an OS specific path in the scope that is not available on the current OS.
+
+## \[2.0.0-rc.5]
+
+- [`cc03ccf5`](https://github.com/tauri-apps/plugins-workspace/commit/cc03ccf5e0e4be8bbf50bbdebe957c84be7f779b) ([#1774](https://github.com/tauri-apps/plugins-workspace/pull/1774)) Fix `scope-app`, `scope-app-recursive` and `scope-index` not properly enabling the application paths.
+
+## \[2.0.0-rc.4]
+
+- [`9291e4d2`](https://github.com/tauri-apps/plugins-workspace/commit/9291e4d2caa31c883c71e55f2193bd8754d72f03) ([#1640](https://github.com/tauri-apps/plugins-workspace/pull/1640) by [@SRutile](https://github.com/tauri-apps/plugins-workspace/../../SRutile)) Support any UTF-8 character in the writeFile API.
+
+## \[2.0.0-rc.3]
+
+- [`a2fe5551`](https://github.com/tauri-apps/plugins-workspace/commit/a2fe55512f908dd11c814ce021d164f01677572a) ([#1727](https://github.com/tauri-apps/plugins-workspace/pull/1727) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Add utility methods on `FilePath` and `SafeFilePath` enums which are:
+
+  - `path`
+  - `simplified`
+  - `into_path`
+- [`a2fe5551`](https://github.com/tauri-apps/plugins-workspace/commit/a2fe55512f908dd11c814ce021d164f01677572a) ([#1727](https://github.com/tauri-apps/plugins-workspace/pull/1727) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Implement `Serialize`, `Deserialize`, `From`, `TryFrom` and `FromStr` traits for `FilePath` and `SafeFilePath` enums.
+- [`a2fe5551`](https://github.com/tauri-apps/plugins-workspace/commit/a2fe55512f908dd11c814ce021d164f01677572a) ([#1727](https://github.com/tauri-apps/plugins-workspace/pull/1727) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Mark `Error` enum as `#[non_exhuastive]`.
+- [`a2fe5551`](https://github.com/tauri-apps/plugins-workspace/commit/a2fe55512f908dd11c814ce021d164f01677572a) ([#1727](https://github.com/tauri-apps/plugins-workspace/pull/1727) by [@amrbashir](https://github.com/tauri-apps/plugins-workspace/../../amrbashir)) Add `SafeFilePath` enum.
+
+## \[2.0.0-rc.2]
+
+- [`f7280c88`](https://github.com/tauri-apps/plugins-workspace/commit/f7280c88309cdf1f2330574fec31e26e01e9cdbd) ([#1710](https://github.com/tauri-apps/plugins-workspace/pull/1710) by [@Legend-Master](https://github.com/tauri-apps/plugins-workspace/../../Legend-Master)) Fix can't use Windows paths like `C:/Users/UserName/file.txt`
+
+### bug
+
+- [`51819c60`](https://github.com/tauri-apps/plugins-workspace/commit/51819c601f863cbfbd11809a1c4cf9df5a20b1e0) ([#1708](https://github.com/tauri-apps/plugins-workspace/pull/1708) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Fixes `writeFile` command implementation on Android.
+
+## \[2.0.0-rc.2]
+
+- [`e2e97db5`](https://github.com/tauri-apps/plugins-workspace/commit/e2e97db51983267f5be84d4f6f0278d58834d1f5) ([#1701](https://github.com/tauri-apps/plugins-workspace/pull/1701) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Update to tauri 2.0.0-rc.8
+
 ## \[2.0.0-rc.1]
 
 - [`5f689902`](https://github.com/tauri-apps/plugins-workspace/commit/5f68990297f2cefac4220649a469adb7fa94fe1b) ([#1645](https://github.com/tauri-apps/plugins-workspace/pull/1645) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Update documentation.
@@ -106,25 +175,3 @@
 ## \[2.0.0-alpha.0]
 
 - [`717ae67`](https://github.com/tauri-apps/plugins-workspace/commit/717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  /pull/454)) Fix `writeBinaryFile` crashing with `command 'write_binary_file' not found`
-- [`d74fc0a`](https://github.com/tauri-apps/plugins-workspace/commit/d74fc0a097996e90a37be8f57d50b7d1f6ca616f)([#555](https://github.com/tauri-apps/plugins-workspace/pull/555)) Update to alpha.11.
-
-## \[2.0.0-alpha.0]
-
-- [`717ae67`](https://github.com/tauri-apps/plugins-workspace/commit/717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  ae67\`]\(https://github.com/tauri-apps/plugins-workspace/commit/717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  .com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  ac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  .com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  s/plugins-workspace/pull/371)) First v2 alpha release!
-  ac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  .com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  kspace/pull/371)) First v2 alpha release!
-  s/plugins-workspace/pull/371)) First v2 alpha release!
-  ac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  .com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!
-  717ae670978feb4492fac1f295998b93f2b9347f)([#371](https://github.com/tauri-apps/plugins-workspace/pull/371)) First v2 alpha release!

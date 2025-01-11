@@ -1,5 +1,31 @@
 # Changelog
 
+## \[2.2.0]
+
+- [`3a79266b`](https://github.com/tauri-apps/plugins-workspace/commit/3a79266b8cf96a55b1ae6339d725567d45a44b1d) ([#2173](https://github.com/tauri-apps/plugins-workspace/pull/2173) by [@FabianLars](https://github.com/tauri-apps/plugins-workspace/../../FabianLars)) Bumped all plugins to `v2.2.0`. From now, the versions for the Rust and JavaScript packages of each plugin will be in sync with each other.
+
+## \[2.0.1]
+
+- [`a1a82208`](https://github.com/tauri-apps/plugins-workspace/commit/a1a82208ed4ab87f83310be0dc95428aec9ab241) ([#1873](https://github.com/tauri-apps/plugins-workspace/pull/1873) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Downgrade MSRV to 1.77.2 to support Windows 7.
+
+## \[2.0.0]
+
+- [`e2c4dfb6`](https://github.com/tauri-apps/plugins-workspace/commit/e2c4dfb6af43e5dd8d9ceba232c315f5febd55c1) Update to tauri v2 stable release.
+
+## \[2.0.0-rc.2]
+
+- [`79d6e19c`](https://github.com/tauri-apps/plugins-workspace/commit/79d6e19c4b38bae0cab29eb88df379e2237d9aac) ([#1777](https://github.com/tauri-apps/plugins-workspace/pull/1777)) Fixed an issue which caused checkPermission and requestPermission to be mixed up.
+
+## \[2.0.0-rc.4]
+
+- [`713c54ef`](https://github.com/tauri-apps/plugins-workspace/commit/713c54ef8365d36afd84585dcabed2fbb751223d) ([#1749](https://github.com/tauri-apps/plugins-workspace/pull/1749) by [@olivierlemasle](https://github.com/tauri-apps/plugins-workspace/../../olivierlemasle)) Remove unused Android dependencies.
+- [`8c3a6a25`](https://github.com/tauri-apps/plugins-workspace/commit/8c3a6a253d7029d370659d2102f91a458745d345) ([#1758](https://github.com/tauri-apps/plugins-workspace/pull/1758) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Validate missing `NSCameraUsageDescription` Info.plist value.
+
+## \[2.0.0-rc.1]
+
+- [`e2e97db5`](https://github.com/tauri-apps/plugins-workspace/commit/e2e97db51983267f5be84d4f6f0278d58834d1f5) ([#1701](https://github.com/tauri-apps/plugins-workspace/pull/1701) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Use `PermissionState` from the `tauri` crate, which now also includes a "prompt with rationale" variant for Android (returned when your app must explain to the user why it needs the permission).
+- [`e2e97db5`](https://github.com/tauri-apps/plugins-workspace/commit/e2e97db51983267f5be84d4f6f0278d58834d1f5) ([#1701](https://github.com/tauri-apps/plugins-workspace/pull/1701) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Update to tauri 2.0.0-rc.8
+
 ## \[2.0.0-rc.2]
 
 - [`b9147758`](https://github.com/tauri-apps/plugins-workspace/commit/b914775898c2bee7ceb20bd17ee595005cd17a64) ([#1679](https://github.com/tauri-apps/plugins-workspace/pull/1679) by [@lucasfernog](https://github.com/tauri-apps/plugins-workspace/../../lucasfernog)) Explicitly set a minimum macOS version for the Swift package.

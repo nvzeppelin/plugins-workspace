@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-//! [![](https://github.com/tauri-apps/plugins-workspace/raw/v2/plugins/fs/banner.png)](https://github.com/tauri-apps/plugins-workspace/tree/v2/plugins/fs)
-//!
 //! Access the file system.
 
 #![doc(
@@ -11,19 +9,13 @@
     html_favicon_url = "https://github.com/tauri-apps/tauri/raw/dev/app-icon.png"
 )]
 
-use std::{
-    convert::Infallible,
-    fmt,
-    io::Read,
-    path::{Path, PathBuf},
-    str::FromStr,
-};
+use std::io::Read;
 
 use serde::Deserialize;
 use tauri::{
     ipc::ScopeObject,
     plugin::{Builder as PluginBuilder, TauriPlugin},
-    utils::acl::Value,
+    utils::{acl::Value, config::FsScope},
     AppHandle, DragDropEvent, Manager, RunEvent, Runtime, WindowEvent,
 };
 
@@ -32,6 +24,7 @@ mod config;
 #[cfg(not(target_os = "android"))]
 mod desktop;
 mod error;
+mod file_path;
 #[cfg(target_os = "android")]
 mod mobile;
 #[cfg(target_os = "android")]
@@ -46,62 +39,11 @@ pub use desktop::Fs;
 pub use mobile::Fs;
 
 pub use error::Error;
-pub use scope::{Event as ScopeEvent, Scope};
+
+pub use file_path::FilePath;
+pub use file_path::SafeFilePath;
 
 type Result<T> = std::result::Result<T, Error>;
-
-/// Represents either a filesystem path or a URI pointing to a file
-/// such as `file://` URIs or Android `content://` URIs.
-#[derive(Debug, serde::Deserialize)]
-#[serde(untagged)]
-pub enum FilePath {
-    Url(url::Url),
-    Path(PathBuf),
-}
-
-impl FromStr for FilePath {
-    type Err = Infallible;
-    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
-        if let Ok(url) = url::Url::from_str(s) {
-            Ok(Self::Url(url))
-        } else {
-            Ok(Self::Path(PathBuf::from(s)))
-        }
-    }
-}
-
-impl From<PathBuf> for FilePath {
-    fn from(value: PathBuf) -> Self {
-        Self::Path(value)
-    }
-}
-
-impl From<&Path> for FilePath {
-    fn from(value: &Path) -> Self {
-        Self::Path(value.to_owned())
-    }
-}
-
-impl From<&PathBuf> for FilePath {
-    fn from(value: &PathBuf) -> Self {
-        Self::Path(value.to_owned())
-    }
-}
-
-impl From<url::Url> for FilePath {
-    fn from(value: url::Url) -> Self {
-        Self::Url(value)
-    }
-}
-
-impl fmt::Display for FilePath {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            Self::Url(u) => u.fmt(f),
-            Self::Path(p) => p.display().fmt(f),
-        }
-    }
-}
 
 #[derive(Debug, Default, Clone, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -119,8 +61,10 @@ pub struct OpenOptions {
     #[serde(default)]
     create_new: bool,
     #[serde(default)]
+    #[allow(unused)]
     mode: Option<u32>,
     #[serde(default)]
+    #[allow(unused)]
     custom_flags: Option<i32>,
 }
 
@@ -406,35 +350,40 @@ impl ScopeObject for scope::Entry {
         app: &AppHandle<R>,
         raw: Value,
     ) -> std::result::Result<Self, Self::Error> {
-        let entry = serde_json::from_value(raw.into()).map(|raw| {
-            let path = match raw {
-                scope::EntryRaw::Value(path) => path,
-                scope::EntryRaw::Object { path } => path,
-            };
-            Self { path }
+        let path = serde_json::from_value(raw.into()).map(|raw| match raw {
+            scope::EntryRaw::Value(path) => path,
+            scope::EntryRaw::Object { path } => path,
         })?;
 
-        Ok(Self {
-            path: app.path().parse(entry.path)?,
-        })
+        match app.path().parse(path) {
+            Ok(path) => Ok(Self { path: Some(path) }),
+            #[cfg(not(target_os = "android"))]
+            Err(tauri::Error::UnknownPath) => Ok(Self { path: None }),
+            Err(err) => Err(err.into()),
+        }
     }
 }
 
+pub(crate) struct Scope {
+    pub(crate) scope: tauri::fs::Scope,
+    pub(crate) require_literal_leading_dot: Option<bool>,
+}
+
 pub trait FsExt<R: Runtime> {
-    fn fs_scope(&self) -> &Scope;
-    fn try_fs_scope(&self) -> Option<&Scope>;
+    fn fs_scope(&self) -> tauri::fs::Scope;
+    fn try_fs_scope(&self) -> Option<tauri::fs::Scope>;
 
     /// Cross platform file system APIs that also support manipulating Android files.
     fn fs(&self) -> &Fs<R>;
 }
 
 impl<R: Runtime, T: Manager<R>> FsExt<R> for T {
-    fn fs_scope(&self) -> &Scope {
-        self.state::<Scope>().inner()
+    fn fs_scope(&self) -> tauri::fs::Scope {
+        self.state::<Scope>().scope.clone()
     }
 
-    fn try_fs_scope(&self) -> Option<&Scope> {
-        self.try_state::<Scope>().map(|s| s.inner())
+    fn try_fs_scope(&self) -> Option<tauri::fs::Scope> {
+        self.try_state::<Scope>().map(|s| s.scope.clone())
     }
 
     fn fs(&self) -> &Fs<R> {
@@ -468,17 +417,20 @@ pub fn init<R: Runtime>() -> TauriPlugin<R, Option<config::Config>> {
             commands::write_file,
             commands::write_text_file,
             commands::exists,
+            commands::size,
             #[cfg(feature = "watch")]
             watcher::watch,
             #[cfg(feature = "watch")]
             watcher::unwatch
         ])
         .setup(|app, api| {
-            let mut scope = Scope::default();
-            scope.require_literal_leading_dot = api
-                .config()
-                .as_ref()
-                .and_then(|c| c.require_literal_leading_dot);
+            let scope = Scope {
+                require_literal_leading_dot: api
+                    .config()
+                    .as_ref()
+                    .and_then(|c| c.require_literal_leading_dot),
+                scope: tauri::fs::Scope::new(app, &FsScope::default())?,
+            };
 
             #[cfg(target_os = "android")]
             {
@@ -501,9 +453,9 @@ pub fn init<R: Runtime>() -> TauriPlugin<R, Option<config::Config>> {
                 let scope = app.fs_scope();
                 for path in paths {
                     if path.is_file() {
-                        scope.allow_file(path);
+                        let _ = scope.allow_file(path);
                     } else {
-                        scope.allow_directory(path, true);
+                        let _ = scope.allow_directory(path, true);
                     }
                 }
             }
